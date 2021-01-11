@@ -11,7 +11,7 @@ public Plugin:myinfo =
 int cooldownTimes[MAXPLAYERS + 1] = {-1, ...};
 public void OnPluginStart()
 {
-	ServerCommand("Echo bruh");
+	ServerCommand("echo >>> KACCM Plugini Basladi <<<");
 	RegConsoleCmd("sm_kaccm", KomutKACCM, "KACCM");
 }
 
