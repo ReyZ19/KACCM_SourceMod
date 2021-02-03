@@ -25,7 +25,7 @@ public Action:KomutKACCM(client, args)
 	int currentTime = GetTime();
     if (cooldownTimes[client] != -1 && cooldownTimes[client] > currentTime)
     {
-    	ReplyToCommand(client, "\x04[Prestige] \x01Bu komutu 1 dakikada bir kez kullanabilirsiniz.");
+    	ReplyToCommand(client, "\x04[SourceMod] \x01Bu komutu 1 dakikada bir kez kullanabilirsiniz.");
         return Plugin_Handled;
     }
     // Komutlar Buraya return Plugin_Handled; yazma!
