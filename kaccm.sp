@@ -1,4 +1,17 @@
+
+//   ██▀███     ▓█████    ▓██   ██▓   ▒███████▒
+//  ▓██ ▒ ██▒   ▓█   ▀     ▒██  ██▒   ▒ ▒ ▒ ▄▀░
+//  ▓██ ░▄█ ▒   ▒███        ▒██ ██░   ░ ▒ ▄▀▒░ 
+//  ▒██▀▀█▄     ▒▓█  ▄      ░ ▐██▓░     ▄▀▒   ░
+//  ░██▓ ▒██▒   ░▒████▒     ░ ██▒▓░   ▒███████▒
+//  ░ ▒▓ ░▒▓░   ░░ ▒░ ░      ██▒▒▒    ░▒▒ ▓░▒░▒
+//    ░▒ ░ ▒░    ░ ░  ░    ▓██ ░▒░    ░░▒ ▒ ░ ▒
+//    ░░   ░       ░       ▒ ▒ ░░     ░ ░ ░ ░ ░
+//     ░           ░  ░    ░ ░          ░ ░    
+//                         ░ ░        ░        
+
 #include <sourcemod>
+
 public Plugin:myinfo =
 {
 	name = "KACCM",
@@ -9,6 +22,7 @@ public Plugin:myinfo =
 };
 
 int cooldownTimes[MAXPLAYERS + 1] = {-1, ...};
+
 public void OnPluginStart()
 {
 	ServerCommand("echo >>> KACCM Plugini Basladi <<<");
