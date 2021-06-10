@@ -45,6 +45,16 @@ public Action:KomutKACCM(client, args)
     // Komutlar Buraya return Plugin_Handled; yazma!
     new RandomNumbersArray[19] = {0,3,4,5,6,8,10,12,15,16,17,19,20,22,26,27,29,30,31}; //Çıkabilecek numaralar
 	new randomnum = GetRandomInt(0, 18);
+	if (randomnum == 31) {
+		PrintToChatAll("\x04%N \x01adlı oyuncunun çubuğu \x04%dCM Düşman G*tüne kurşun", client, RandomNumbersArray[randomnum]);
+		cooldownTimes[client] = currentTime + 60;
+		return Plugin_Handled;
+	}
+	if (randomnum == 0) {
+		PrintToChatAll("\x04%N \x01adlı oyuncunun çubuğu yok \x04%dCM ( ͠° ͟ʖ ͡°)", client, RandomNumbersArray[randomnum]);
+		cooldownTimes[client] = currentTime + 60;
+		return Plugin_Handled;
+	}
 	PrintToChatAll("\x04%N \x01adlı oyuncunun çubuğu \x04%dCM", client, RandomNumbersArray[randomnum]);
 	// Komutlar bitiş
     cooldownTimes[client] = currentTime + 60; // Sure
