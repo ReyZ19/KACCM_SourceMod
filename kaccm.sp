@@ -1,18 +1,8 @@
-
-//   ██▀███     ▓█████    ▓██   ██▓   ▒███████▒
-//  ▓██ ▒ ██▒   ▓█   ▀     ▒██  ██▒   ▒ ▒ ▒ ▄▀░
-//  ▓██ ░▄█ ▒   ▒███        ▒██ ██░   ░ ▒ ▄▀▒░ 
-//  ▒██▀▀█▄     ▒▓█  ▄      ░ ▐██▓░     ▄▀▒   ░
-//  ░██▓ ▒██▒   ░▒████▒     ░ ██▒▓░   ▒███████▒
-//  ░ ▒▓ ░▒▓░   ░░ ▒░ ░      ██▒▒▒    ░▒▒ ▓░▒░▒
-//    ░▒ ░ ▒░    ░ ░  ░    ▓██ ░▒░    ░░▒ ▒ ░ ▒
-//    ░░   ░       ░       ▒ ▒ ░░     ░ ░ ░ ░ ░
-//     ░           ░  ░    ░ ░          ░ ░    
-//                         ░ ░        ░        
-
 #include <sourcemod>
+#include <sdktools>
+#include <multicolors>
 
-public Plugin:myinfo =
+public Plugin myinfo =
 {
 	name = "KACCM",
 	author = "ReyZ",
@@ -25,7 +15,6 @@ int cooldownTimes[MAXPLAYERS + 1] = {-1, ...};
 
 public void OnPluginStart()
 {
-	ServerCommand("echo >>> KACCM Plugini Basladi <<<");
 	RegConsoleCmd("sm_kaccm", KomutKACCM, "KACCM");
 }
 
@@ -37,26 +26,29 @@ public void OnClientPutInServer(int client)
 public Action:KomutKACCM(client, args)
 {
 	int currentTime = GetTime();
-    if (cooldownTimes[client] != -1 && cooldownTimes[client] > currentTime)
+	if (cooldownTimes[client] != -1 && cooldownTimes[client] > currentTime)
     {
-    	ReplyToCommand(client, "\x04[SourceMod] \x01Bu komutu 1 dakikada bir kez kullanabilirsiniz.");
-        return Plugin_Handled;
+		EmitSoundToClient(client, "buttons/button11.wav");
+		CReplyToCommand(client, "{lime}[Rönesans] {white}Bu komutu {red}1 dakikada {white}bir kez kullanabilirsiniz.");
+		return Plugin_Handled;
     }
-    // Komutlar Buraya return Plugin_Handled; yazma!
-    new RandomNumbersArray[19] = {0,3,4,5,6,8,10,12,15,16,17,19,20,22,26,27,29,30,31}; //Çıkabilecek numaralar
+	new RandomNumbersArray[19] = {0,3,4,5,6,8,10,12,15,16,17,19,20,22,26,27,29,30,31}; //Çıkabilecek numaralar
 	new randomnum = GetRandomInt(0, 18);
-	if (randomnum == 31) {
-		PrintToChatAll("\x04%N \x01adlı oyuncunun çubuğu \x04%dCM Düşman G*tüne kurşun", client, RandomNumbersArray[randomnum]);
-		cooldownTimes[client] = currentTime + 60;
-		return Plugin_Handled;
+	
+	switch(randomnum) {
+		case 18:
+		{
+			CPrintToChatAllEx(client, "{lime}[Rönesans] {teamcolor}%N {white}adlı oyuncunun çubuğu max seviyede {fullred}31CM {darkorange}(düşman götüne kurşun)", client);
+		}
+		case 0:
+		{
+			CPrintToChatAllEx(client, "{lime}[Rönesans] {teamcolor}%N {white}adlı oyuncunun çubuğu yok {hotpink}0CM", client);
+		}
+		default:
+		{
+			CPrintToChatAllEx(client, "{lime}[Rönesans] {teamcolor}%N {white}adlı oyuncunun çubuğu {limegreen}%dCM", client, RandomNumbersArray[randomnum]);
+		}
 	}
-	if (randomnum == 0) {
-		PrintToChatAll("\x04%N \x01adlı oyuncunun çubuğu yok \x04%dCM ( ͠° ͟ʖ ͡°)", client, RandomNumbersArray[randomnum]);
-		cooldownTimes[client] = currentTime + 60;
-		return Plugin_Handled;
-	}
-	PrintToChatAll("\x04%N \x01adlı oyuncunun çubuğu \x04%dCM", client, RandomNumbersArray[randomnum]);
-	// Komutlar bitiş
-    cooldownTimes[client] = currentTime + 60; // Sure
-    return Plugin_Handled;
+	cooldownTimes[client] = currentTime + 60;
+	return Plugin_Handled;
 }
