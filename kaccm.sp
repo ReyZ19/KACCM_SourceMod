@@ -23,7 +23,7 @@ public void OnClientPutInServer(int client)
     cooldownTimes[client] = -1;
 }
 
-public Action:KomutKACCM(client, args)
+public Action KomutKACCM(client, args)
 {
 	int currentTime = GetTime();
 	if (cooldownTimes[client] != -1 && cooldownTimes[client] > currentTime)
@@ -32,8 +32,8 @@ public Action:KomutKACCM(client, args)
 		CReplyToCommand(client, "{lime}[SourceMod] {white}Bu komutu {red}1 dakikada {white}bir kez kullanabilirsiniz.");
 		return Plugin_Handled;
     }
-	new RandomNumbersArray[19] = {0,3,4,5,6,8,10,12,15,16,17,19,20,22,26,27,29,30,31}; //Çıkabilecek numaralar
-	new randomnum = GetRandomInt(0, 18);
+	int RandomNumbersArray[19] = {0,3,4,5,6,8,10,12,15,16,17,19,20,22,26,27,29,30,31}; //Çıkabilecek numaralar
+	int randomnum = GetRandomInt(0, 18);
 	
 	switch(randomnum) {
 		case 18:
